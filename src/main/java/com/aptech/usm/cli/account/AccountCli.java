@@ -13,8 +13,7 @@ public class AccountCli implements Cli {
     @Override
     public List<Cli> getSubCli() {
         return List.of(
-                new AccountChangePasswordCli(),
-                new AccountCreateCli()
+                new AccountChangePasswordCli()
         );
     }
 
