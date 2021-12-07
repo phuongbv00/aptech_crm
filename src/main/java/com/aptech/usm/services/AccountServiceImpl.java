@@ -24,4 +24,16 @@ public class AccountServiceImpl implements AccountService {
         model.setPassword(passwordEncoder.encode(model.getPassword()));
         accountRepository.save(model);
     }
+
+    @Override
+    public boolean changePassword(Long accId, String oldPwd, String newPwd) {
+        var acc = accountRepository.findById(accId)
+                .filter(a -> passwordEncoder.matches(oldPwd, a.getPassword()))
+                .orElse(null);
+        if (acc == null)
+            return false;
+        acc.setPassword(passwordEncoder.encode(newPwd));
+        accountRepository.save(acc);
+        return true;
+    }
 }
