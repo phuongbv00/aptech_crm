@@ -1,9 +1,9 @@
 package com.aptech.usm.services;
 
-import com.aptech.usm.dto.AccountDTO;
+import com.aptech.usm.dto.account.AccountCreateDTO;
 
 public interface AccountService {
-    void create(AccountDTO account);
+    void create(AccountCreateDTO account);
 
     boolean changePassword(Long accId, String oldPwd, String newPwd);
 }

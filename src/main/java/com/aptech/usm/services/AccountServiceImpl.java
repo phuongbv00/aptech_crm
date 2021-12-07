@@ -2,7 +2,7 @@ package com.aptech.usm.services;
 
 import com.aptech.usm.data.domains.Account;
 import com.aptech.usm.data.repositories.AccountRepository;
-import com.aptech.usm.dto.AccountDTO;
+import com.aptech.usm.dto.account.AccountCreateDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -11,16 +11,19 @@ import org.springframework.stereotype.Service;
 public class AccountServiceImpl implements AccountService {
     private final PasswordEncoder passwordEncoder;
     private final AccountRepository accountRepository;
+    private final ObjectMapper objectMapper;
 
     public AccountServiceImpl(PasswordEncoder passwordEncoder,
-                              AccountRepository accountRepository) {
+                              AccountRepository accountRepository,
+                              ObjectMapper objectMapper) {
         this.passwordEncoder = passwordEncoder;
         this.accountRepository = accountRepository;
+        this.objectMapper = objectMapper;
     }
 
     @Override
-    public void create(AccountDTO account) {
-        var model = new ObjectMapper().convertValue(account, Account.class);
+    public void create(AccountCreateDTO account) {
+        var model = objectMapper.convertValue(account, Account.class);
         model.setPassword(passwordEncoder.encode(model.getPassword()));
         accountRepository.save(model);
     }

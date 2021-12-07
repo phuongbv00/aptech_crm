@@ -1,4 +1,4 @@
-package com.aptech.usm.dto;
+package com.aptech.usm.dto.account;
 
 import com.aptech.usm.utils.enums.AccountRoleEnum;
 import lombok.*;
@@ -11,6 +11,5 @@ import lombok.*;
 public class AccountDTO {
     private Long id;
     private String username;
-    private String password;
     private AccountRoleEnum role;
 }
