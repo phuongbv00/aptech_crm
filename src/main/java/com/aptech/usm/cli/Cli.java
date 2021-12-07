@@ -20,7 +20,7 @@ public interface Cli extends Runnable {
         var map = IntStream.range(1, subCli.size() + 1)
                 .boxed()
                 .collect(Collectors.toMap(Function.identity(), i -> subCli.get(i - 1)));
-        if (CliStack.size() > 1) {
+        if (CliStack.size() > 2) {
             map.put(0, new GoBackCli());
         }
         return map;
