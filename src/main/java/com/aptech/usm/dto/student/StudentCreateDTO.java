@@ -1,26 +1,21 @@
-package com.aptech.usm.data.domains;
+package com.aptech.usm.dto.student;
 
 import lombok.*;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
-@Table
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Student {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class StudentCreateDTO {
+    private String username;
+    private String password;
+
     private String fullName;
     private String identityCard;
     private LocalDate birthday;
     private String phone;
     private String email;
-
-    private Long accountId;
 }
