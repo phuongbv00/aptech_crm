@@ -16,10 +16,6 @@ public class ClassRegistration {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Double componentMark;
-    private Double examMark;
-    private Double totalMark;
-
     private Instant registrationTime;
     private ClassRegistrationStatusEnum status = ClassRegistrationStatusEnum.ACTIVE;
 

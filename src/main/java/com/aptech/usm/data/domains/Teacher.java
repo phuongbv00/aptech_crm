@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.Instant;
+import java.time.LocalDate;
 
 @Entity
 @Table
@@ -16,7 +16,7 @@ public class Teacher {
     private Long id;
     private String fullName;
     private String identityCard;
-    private Instant birthday;
+    private LocalDate birthday;
     private String phone;
     private String email;
 

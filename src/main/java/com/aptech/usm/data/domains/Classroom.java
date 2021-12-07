@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.Instant;
+import java.time.LocalDate;
 
 @Entity
 @Table
@@ -15,8 +15,8 @@ public class Classroom {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private Instant startTime;
-    private Instant endTime;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private String address;
 
     private Long subjectId;

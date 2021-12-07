@@ -31,7 +31,7 @@ public class SubjectCreateCli implements Cli {
         subject.setCredits(Integer.parseInt(scanner.nextLine()));
         var titles = new String[]{"ID", "Tên môn", "Số tín chỉ"};
         CliUtil.printRecord(titles, subject, Subject.class);
-        System.out.println("Bạn muốn tạo mới môn học? (y/n)");
+        System.out.print("Bạn muốn tạo mới môn học? (y/n): ");
         if (scanner.nextLine().equals("y")) {
             BeanUtil.getBean(SubjectRepository.class).save(subject);
             System.out.println("Tạo mới môn học thành công");
