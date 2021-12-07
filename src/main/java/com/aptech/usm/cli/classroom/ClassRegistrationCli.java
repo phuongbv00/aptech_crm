@@ -1,14 +1,14 @@
-package com.aptech.usm.cli.account;
+package com.aptech.usm.cli.classroom;
 
 import com.aptech.usm.cli.Cli;
 
 import java.util.Collections;
 import java.util.List;
 
-public class AccountCli implements Cli {
+public class ClassRegistrationCli implements Cli {
     @Override
     public String getLabel() {
-        return "Tài khoản";
+        return "Đăng ký học";
     }
 
     @Override
