@@ -2,6 +2,7 @@ package com.aptech.usm.services;
 
 import com.aptech.usm.data.domains.Account;
 import com.aptech.usm.data.repositories.AccountRepository;
+import com.aptech.usm.utils.enums.AccountRoleEnum;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -37,5 +38,12 @@ public class AuthService {
 
     public Optional<Account> getAuth() {
         return Optional.ofNullable(authorizedAccount);
+    }
+
+    public boolean isAdmin() {
+        return getAuth()
+                .map(Account::getRole)
+                .map(r -> r.equals(AccountRoleEnum.ADMIN))
+                .orElse(false);
     }
 }

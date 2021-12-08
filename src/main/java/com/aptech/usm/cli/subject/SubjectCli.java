@@ -3,12 +3,16 @@ package com.aptech.usm.cli.subject;
 import com.aptech.usm.cli.Cli;
 import com.aptech.usm.data.domains.Subject;
 import com.aptech.usm.data.repositories.SubjectRepository;
+import com.aptech.usm.services.AuthService;
 import com.aptech.usm.utils.BeanUtil;
 import com.aptech.usm.utils.CliUtil;
 
+import java.util.Collections;
 import java.util.List;
 
 public class SubjectCli implements Cli {
+    private final AuthService auth = BeanUtil.getBean(AuthService.class);
+
     @Override
     public String getLabel() {
         return "Môn học";
@@ -16,9 +20,9 @@ public class SubjectCli implements Cli {
 
     @Override
     public List<Cli> getSubCli() {
-        return List.of(
-                new SubjectCreateCli()
-        );
+        return auth.isAdmin()
+                ? List.of(new SubjectCreateCli())
+                : Collections.emptyList();
     }
 
     @Override

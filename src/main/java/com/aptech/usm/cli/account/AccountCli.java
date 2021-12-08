@@ -1,8 +1,10 @@
 package com.aptech.usm.cli.account;
 
 import com.aptech.usm.cli.Cli;
+import com.aptech.usm.data.domains.Account;
 import com.aptech.usm.data.repositories.AccountRepository;
 import com.aptech.usm.dto.account.AccountDTO;
+import com.aptech.usm.services.AuthService;
 import com.aptech.usm.utils.BeanUtil;
 import com.aptech.usm.utils.CliUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,6 +27,8 @@ public class AccountCli implements Cli {
 
     @Override
     public void run() {
+        if (!BeanUtil.getBean(AuthService.class).isAdmin())
+            return;
         var mapper = BeanUtil.getBean(ObjectMapper.class);
         var repo = BeanUtil.getBean(AccountRepository.class);
         var dataset = repo.findAll()

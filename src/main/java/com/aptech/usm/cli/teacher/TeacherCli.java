@@ -3,12 +3,16 @@ package com.aptech.usm.cli.teacher;
 import com.aptech.usm.cli.Cli;
 import com.aptech.usm.data.domains.Teacher;
 import com.aptech.usm.data.repositories.TeacherRepository;
+import com.aptech.usm.services.AuthService;
 import com.aptech.usm.utils.BeanUtil;
 import com.aptech.usm.utils.CliUtil;
 
+import java.util.Collections;
 import java.util.List;
 
 public class TeacherCli implements Cli {
+    private final AuthService auth = BeanUtil.getBean(AuthService.class);
+
     @Override
     public String getLabel() {
         return "Giảng viên";
@@ -16,9 +20,9 @@ public class TeacherCli implements Cli {
 
     @Override
     public List<Cli> getSubCli() {
-        return List.of(
-                new TeacherCreateCli()
-        );
+        return auth.isAdmin()
+                ? List.of(new TeacherCreateCli())
+                : Collections.emptyList();
     }
 
     @Override
