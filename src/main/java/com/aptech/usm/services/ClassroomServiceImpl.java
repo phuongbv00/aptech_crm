@@ -43,6 +43,7 @@ public class ClassroomServiceImpl implements ClassroomService {
         var stdIds = classRegistrationRepository.findByClassroomId(classId)
                 .stream()
                 .map(ClassRegistration::getStudentId)
+                .distinct()
                 .collect(Collectors.toList());
         return studentRepository.findByIdIn(stdIds);
     }
