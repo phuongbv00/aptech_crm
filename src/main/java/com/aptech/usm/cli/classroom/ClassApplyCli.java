@@ -5,10 +5,10 @@ import com.aptech.usm.cli.Cli;
 import java.util.Collections;
 import java.util.List;
 
-public class ClassRegistrationCli implements Cli {
+public class ClassApplyCli implements Cli {
     @Override
     public String getLabel() {
-        return "Đăng ký học";
+        return "Đăng ký lớp";
     }
 
     @Override

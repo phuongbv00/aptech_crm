@@ -1,7 +1,9 @@
 package com.aptech.usm.services;
 
 import com.aptech.usm.data.domains.Account;
+import com.aptech.usm.data.domains.Student;
 import com.aptech.usm.data.repositories.AccountRepository;
+import com.aptech.usm.data.repositories.StudentRepository;
 import com.aptech.usm.utils.enums.AccountRoleEnum;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,13 +14,17 @@ import java.util.Optional;
 public class AuthService {
     private final AccountRepository accountRepository;
     private final PasswordEncoder passwordEncoder;
+    private final StudentRepository studentRepository;
 
     private Account authorizedAccount;
+    private Student authorizedStudent;
 
     public AuthService(AccountRepository accountRepository,
-                       PasswordEncoder passwordEncoder) {
+                       PasswordEncoder passwordEncoder,
+                       StudentRepository studentRepository) {
         this.accountRepository = accountRepository;
         this.passwordEncoder = passwordEncoder;
+        this.studentRepository = studentRepository;
     }
 
     public boolean login(String username, String password) {
@@ -29,6 +35,8 @@ public class AuthService {
         if (acc == null)
             return false;
         authorizedAccount = acc;
+        studentRepository.findByAccountId(acc.getId())
+                .ifPresent(std -> authorizedStudent = std);
         return true;
     }
 
@@ -38,6 +46,10 @@ public class AuthService {
 
     public Optional<Account> getAuth() {
         return Optional.ofNullable(authorizedAccount);
+    }
+
+    public Optional<Student> getAuthStd() {
+        return Optional.ofNullable(authorizedStudent);
     }
 
     public boolean isAdmin() {
