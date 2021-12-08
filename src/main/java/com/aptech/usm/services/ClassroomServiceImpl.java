@@ -7,8 +7,10 @@ import com.aptech.usm.data.repositories.ClassroomRepository;
 import com.aptech.usm.data.repositories.StudentRepository;
 import com.aptech.usm.dto.classroom.ClassRegistrationDTO;
 import com.aptech.usm.dto.classroom.ClassroomDTO;
+import com.aptech.usm.utils.enums.ClassRegistrationStatusEnum;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,5 +45,32 @@ public class ClassroomServiceImpl implements ClassroomService {
                 .map(ClassRegistration::getStudentId)
                 .collect(Collectors.toList());
         return studentRepository.findByIdIn(stdIds);
+    }
+
+    @Override
+    public boolean apply(Long studentId, Long classId) {
+        return classRegistrationRepository
+                .findByClassroomIdAndStudentIdAndStatus(classId, studentId, ClassRegistrationStatusEnum.ACTIVE)
+                .map(r -> false)
+                .orElseGet(() -> {
+                    classRegistrationRepository.save(ClassRegistration.builder()
+                            .classroomId(classId)
+                            .studentId(studentId)
+                            .registrationTime(Instant.now())
+                            .build());
+                    return true;
+                });
+    }
+
+    @Override
+    public boolean leave(Long studentId, Long classId) {
+        return classRegistrationRepository
+                .findByClassroomIdAndStudentIdAndStatus(classId, studentId, ClassRegistrationStatusEnum.ACTIVE)
+                .map(r -> {
+                    r.setStatus(ClassRegistrationStatusEnum.INACTIVE);
+                    classRegistrationRepository.save(r);
+                    return true;
+                })
+                .orElse(false);
     }
 }

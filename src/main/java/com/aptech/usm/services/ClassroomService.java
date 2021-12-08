@@ -12,4 +12,8 @@ public interface ClassroomService {
     List<ClassRegistrationDTO> findClassRegistrationsByStudentId(Long studentId);
 
     List<Student> findStudentsByClassId(Long classId);
+
+    boolean apply(Long studentId, Long classId);
+
+    boolean leave(Long studentId, Long classId);
 }

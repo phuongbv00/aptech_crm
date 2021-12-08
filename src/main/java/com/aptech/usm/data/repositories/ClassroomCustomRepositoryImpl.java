@@ -61,7 +61,7 @@ public class ClassroomCustomRepositoryImpl implements ClassroomCustomRepository 
                 "         left join teacher t on clr.teacher_id = t.id\n" +
                 "         left join subject s on clr.subject_id = s.id\n" +
                 "         left join student std on cr.student_id = std.id\n" +
-                "where cr.student_id = :studentId";
+                "where cr.student_id = :studentId and cr.status = 1";
         var query = em.createNativeQuery(sql);
         query.setParameter("studentId", studentId);
         var rs = (List<Object[]>) query.getResultList();
