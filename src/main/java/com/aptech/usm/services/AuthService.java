@@ -5,6 +5,8 @@ import com.aptech.usm.data.repositories.AccountRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class AuthService {
     private final AccountRepository accountRepository;
@@ -33,7 +35,7 @@ public class AuthService {
         return authorizedAccount != null;
     }
 
-    public Account getAuth() {
-        return authorizedAccount;
+    public Optional<Account> getAuth() {
+        return Optional.ofNullable(authorizedAccount);
     }
 }
