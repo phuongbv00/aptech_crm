@@ -8,6 +8,9 @@ import java.util.Arrays;
 public class BatchSeeder implements Runnable {
     private final Runnable[] seeders = new Runnable[]{
             new AccountSeeder(),
+            new SubjectSeeder(),
+            new TeacherSeeder(),
+            new StudentSeeder(),
     };
 
     @Override

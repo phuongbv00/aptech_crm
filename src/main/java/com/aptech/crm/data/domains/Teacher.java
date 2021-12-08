@@ -1,7 +1,6 @@
 package com.aptech.crm.data.domains;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -10,6 +9,9 @@ import java.time.LocalDate;
 @Table
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +21,4 @@ public class Teacher {
     private LocalDate birthday;
     private String phone;
     private String email;
-
-    private Long accountId;
 }
