@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.aptech</groupId>
-    <artifactId>usm</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>usm</name>
-    <description>usm</description>
+    <artifactId>crm</artifactId>
+    <version>1.0.0</version>
+    <name>crm</name>
+    <description>Classroom registration management</description>
     <properties>
         <java.version>11</java.version>
     </properties>
